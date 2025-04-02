@@ -42,20 +42,22 @@ export const fetchNewsData = createAsyncThunk(
       
       const data = await response.json();
       
-      if (!data.results) {
-        throw new Error('No news data found');
+      if (!data.results || !Array.isArray(data.results)) {
+        console.log('Received invalid news data:', data);
+        return [];
       }
       
       return data.results.map((item: any, index: number) => ({
         id: item.article_id || `news-${index}`,
-        title: item.title,
-        description: item.description,
-        url: item.link,
-        source: item.source_id,
-        publishedAt: item.pubDate,
+        title: item.title || 'No Title',
+        description: item.description || 'No Description',
+        url: item.link || '#',
+        source: item.source_id || 'Unknown',
+        publishedAt: item.pubDate || new Date().toISOString(),
         imageUrl: item.image_url,
       }));
     } catch (error) {
+      console.error('Error fetching news data:', error);
       if (error instanceof Error) {
         return rejectWithValue(error.message);
       }

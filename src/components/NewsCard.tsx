@@ -16,25 +16,29 @@ const NewsCard: React.FC<NewsCardProps> = ({ data }) => {
       </CardHeader>
       <CardContent className="p-0">
         <ul className="divide-y divide-gray-100 dark:divide-gray-700">
-          {data.map((item) => (
-            <li key={item.id} className="p-4 hover:bg-gray-50 dark:hover:bg-gray-750">
-              <h3 className="font-medium text-sm mb-1 line-clamp-2">{item.title}</h3>
-              <p className="text-xs text-gray-500 mb-2 line-clamp-2">{item.description}</p>
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-gray-500">
-                  {item.source} • {new Date(item.publishedAt).toLocaleDateString()}
-                </span>
-                <a 
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-nexus-purple hover:underline"
-                >
-                  Read More
-                </a>
-              </div>
-            </li>
-          ))}
+          {data && data.length > 0 ? (
+            data.map((item) => (
+              <li key={item.id} className="p-4 hover:bg-gray-50 dark:hover:bg-gray-750">
+                <h3 className="font-medium text-sm mb-1 line-clamp-2">{item.title}</h3>
+                <p className="text-xs text-gray-500 mb-2 line-clamp-2">{item.description}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-gray-500">
+                    {item.source} • {new Date(item.publishedAt).toLocaleDateString()}
+                  </span>
+                  <a 
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-nexus-purple hover:underline"
+                  >
+                    Read More
+                  </a>
+                </div>
+              </li>
+            ))
+          ) : (
+            <li className="p-4 text-center text-gray-500">No news data available</li>
+          )}
         </ul>
       </CardContent>
       <CardFooter className="pt-2">

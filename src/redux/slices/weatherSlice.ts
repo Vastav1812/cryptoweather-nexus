@@ -1,3 +1,4 @@
+
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 // Types
@@ -48,35 +49,62 @@ export const fetchWeatherData = createAsyncThunk(
   'weather/fetchWeatherData',
   async (_, { rejectWithValue }) => {
     try {
-      const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+      const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY || '2b7e1fa06540a5577a6e1e62b003f01e';
       
       const weatherPromises = cities.map(async (city) => {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&appid=${apiKey}&units=metric`
-        );
-        
-        if (!response.ok) {
-          throw new Error(`Weather API error: ${response.statusText}`);
+        try {
+          const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&appid=${apiKey}&units=metric`
+          );
+          
+          if (!response.ok) {
+            console.error(`Weather API error for ${city.name}: ${response.statusText}`);
+            return {
+              id: city.id,
+              city: city.name,
+              country: city.country,
+              temperature: 0,
+              humidity: 0,
+              conditions: 'Unknown',
+              icon: '',
+              windSpeed: 0,
+              timestamp: Date.now(),
+            };
+          }
+          
+          const data = await response.json();
+          
+          return {
+            id: city.id,
+            city: city.name,
+            country: city.country,
+            temperature: data.main.temp,
+            humidity: data.main.humidity,
+            conditions: data.weather[0].main,
+            icon: data.weather[0].icon,
+            windSpeed: data.wind.speed,
+            timestamp: Date.now(),
+          };
+        } catch (error) {
+          console.error(`Error fetching weather for ${city.name}:`, error);
+          return {
+            id: city.id,
+            city: city.name,
+            country: city.country,
+            temperature: 0,
+            humidity: 0,
+            conditions: 'Error',
+            icon: '',
+            windSpeed: 0,
+            timestamp: Date.now(),
+          };
         }
-        
-        const data = await response.json();
-        
-        return {
-          id: city.id,
-          city: city.name,
-          country: city.country,
-          temperature: data.main.temp,
-          humidity: data.main.humidity,
-          conditions: data.weather[0].main,
-          icon: data.weather[0].icon,
-          windSpeed: data.wind.speed,
-          timestamp: Date.now(),
-        };
       });
       
       const weatherData = await Promise.all(weatherPromises);
       return weatherData;
     } catch (error) {
+      console.error('Error fetching weather data:', error);
       if (error instanceof Error) {
         return rejectWithValue(error.message);
       }
