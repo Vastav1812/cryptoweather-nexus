@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { NewsItem } from '@/redux/slices/newsSlice';
+import { AlertCircle } from 'lucide-react';
 
 interface NewsCardProps {
   data: NewsItem[];
@@ -37,7 +38,13 @@ const NewsCard: React.FC<NewsCardProps> = ({ data }) => {
               </li>
             ))
           ) : (
-            <li className="p-4 text-center text-gray-500">No news data available</li>
+            <li className="p-4 text-center">
+              <div className="flex flex-col items-center justify-center py-6 text-gray-500">
+                <AlertCircle className="w-8 h-8 mb-2" />
+                <p>No news data available</p>
+                <p className="text-xs mt-2">Please check your API key configuration</p>
+              </div>
+            </li>
           )}
         </ul>
       </CardContent>

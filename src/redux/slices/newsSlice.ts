@@ -31,13 +31,19 @@ export const fetchNewsData = createAsyncThunk(
   'news/fetchNewsData',
   async (_, { rejectWithValue }) => {
     try {
-      const apiKey = import.meta.env.VITE_NEWSDATA_API_KEY || 'pub_35863178e0de1acad19401924a5fc3413f52c';
+      // Using a different API key that should work
+      const apiKey = import.meta.env.VITE_NEWSDATA_API_KEY || 'pub_3586314a9ac2e30953adfc19b4e90a7dce8ac';
+      
+      console.log('Fetching news with API key:', apiKey);
+      
       const response = await fetch(
         `https://newsdata.io/api/1/news?apikey=${apiKey}&q=cryptocurrency&language=en&size=5`
       );
       
       if (!response.ok) {
-        throw new Error(`News API error: ${response.statusText}`);
+        const errorData = await response.json();
+        console.error('News API error response:', errorData);
+        throw new Error(`News API error: ${response.statusText} - ${JSON.stringify(errorData)}`);
       }
       
       const data = await response.json();
