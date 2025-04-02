@@ -31,8 +31,8 @@ export const fetchNewsData = createAsyncThunk(
   'news/fetchNewsData',
   async (_, { rejectWithValue }) => {
     try {
-      // Using a different API key that should work
-      const apiKey = import.meta.env.VITE_NEWSDATA_API_KEY || 'pub_3586314a9ac2e30953adfc19b4e90a7dce8ac';
+      // Using the new API key provided by the user
+      const apiKey = import.meta.env.VITE_NEWSDATA_API_KEY || 'pub_77724ed8bc9a31e69eb8e792cc17e6f013c3e';
       
       console.log('Fetching news with API key:', apiKey);
       
