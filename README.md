@@ -1,73 +1,104 @@
-# Welcome to your Lovable project
 
-## Project info
+# CryptoWeather Nexus
+
+A modern, multi-page dashboard combining weather data, cryptocurrency information, and real-time notifications via WebSocket.
+
+## Project Info
 
 **URL**: https://lovable.dev/projects/5c87eaa5-55b7-4208-a703-8193b084d018
 
-## How can I edit this code?
+## Overview
 
-There are several ways of editing your application.
+CryptoWeather Nexus is a comprehensive dashboard application that provides:
 
-**Use Lovable**
+- Real-time weather information for major global cities
+- Live cryptocurrency price tracking with WebSocket integration
+- Latest cryptocurrency news headlines
+- Detailed analytics and historical data for both weather and crypto
+- User preference system for favorite cities and cryptocurrencies
+- Real-time notifications for significant price changes and weather alerts
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5c87eaa5-55b7-4208-a703-8193b084d018) and start prompting.
+## Technologies Used
 
-Changes made via Lovable will be committed automatically to this repo.
+- React with TypeScript
+- Redux with Redux Toolkit for state management
+- WebSocket for real-time data updates
+- Chart visualizations with Recharts
+- Responsive UI with Tailwind CSS and shadcn/ui components
+- React Router for navigation
+- API integrations with:
+  - OpenWeatherMap for weather data
+  - CoinGecko for cryptocurrency data
+  - NewsData.io for cryptocurrency news
+  - CoinCap WebSocket for real-time price updates
 
-**Use your preferred IDE**
+## Features
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Dashboard
+- Combined overview of weather, cryptocurrency prices, and news
+- Tabs for viewing all items or just favorites
+- Real-time updates indicator
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Weather
+- Current weather conditions for major cities
+- Temperature, humidity, and wind data
+- Historical weather data visualization
+- Customizable temperature units (Celsius/Fahrenheit)
 
-Follow these steps:
+### Cryptocurrency
+- Real-time price tracking for Bitcoin, Ethereum, and Solana
+- Price change indicators and market metrics
+- Historical price charts
+- WebSocket integration for live updates
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Notifications
+- Real-time alerts for significant cryptocurrency price changes
+- Simulated weather alerts for demonstration purposes
+- Notification management system with read/unread state
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### User Preferences
+- Favorite cities and cryptocurrencies
+- Persisted preferences using local storage
+- Temperature unit selection
 
-# Step 3: Install the necessary dependencies.
-npm i
+## Setup Instructions
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Create a `.env` file in the root directory with the following API keys:
+   ```
+   NEXT_PUBLIC_OPENWEATHER_API_KEY=your_openweather_api_key
+   NEXT_PUBLIC_NEWSDATA_API_KEY=your_newsdata_api_key
+   NEXT_PUBLIC_COINCAP_API_KEY=your_coincap_api_key
+   ```
+4. Start the development server with `npm run dev`
 
-**Edit a file directly in GitHub**
+## Design Decisions
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### State Management
+- Redux is used for global state management
+- Separate slices for different data domains (weather, crypto, news)
+- WebSocket integration for real-time updates
+- Local storage for persisting user preferences
 
-**Use GitHub Codespaces**
+### User Interface
+- Responsive design that works on all device sizes
+- Card-based layout for clear data presentation
+- Tabs for switching between all items and favorites
+- Consistent color scheme and component styling
+- Toast notifications for important events
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Data Handling
+- Periodic data refresh to ensure up-to-date information
+- Error handling for API failures
+- Loading states with skeleton loaders
+- Data transformation for chart visualization
 
-## What technologies are used for this project?
+### Performance Considerations
+- Efficient re-renders using React hooks
+- WebSocket connection management
+- Throttled updates to prevent UI jank
 
-This project is built with:
+## License
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/5c87eaa5-55b7-4208-a703-8193b084d018) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes it is!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is licensed under the MIT License - see the LICENSE file for details.
