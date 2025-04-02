@@ -3,10 +3,6 @@
 
 A modern, multi-page dashboard combining weather data, cryptocurrency information, and real-time notifications via WebSocket.
 
-## Project Info
-
-**URL**: https://lovable.dev/projects/5c87eaa5-55b7-4208-a703-8193b084d018
-
 ## Overview
 
 CryptoWeather Nexus is a comprehensive dashboard application that provides:
