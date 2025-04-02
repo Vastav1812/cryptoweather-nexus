@@ -29,7 +29,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ data }) => {
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs text-nexus-purple hover:underline"
+                    className="text-xs text-blue-500 hover:underline"
                   >
                     Read More
                   </a>

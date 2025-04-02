@@ -31,7 +31,7 @@ export const fetchNewsData = createAsyncThunk(
   'news/fetchNewsData',
   async (_, { rejectWithValue }) => {
     try {
-      const apiKey = process.env.NEXT_PUBLIC_NEWSDATA_API_KEY;
+      const apiKey = import.meta.env.VITE_NEWSDATA_API_KEY || 'pub_35863178e0de1acad19401924a5fc3413f52c';
       const response = await fetch(
         `https://newsdata.io/api/1/news?apikey=${apiKey}&q=cryptocurrency&language=en&size=5`
       );
