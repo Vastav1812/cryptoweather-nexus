@@ -20,11 +20,11 @@ const queryClient = new QueryClient();
 const App = () => (
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
-      <WebSocketProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
+      <BrowserRouter>
+        <WebSocketProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/weather" element={<Weather />} />
@@ -33,9 +33,9 @@ const App = () => (
               <Route path="/crypto/:cryptoId" element={<CryptoDetails />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </WebSocketProvider>
+          </TooltipProvider>
+        </WebSocketProvider>
+      </BrowserRouter>
     </QueryClientProvider>
   </Provider>
 );
